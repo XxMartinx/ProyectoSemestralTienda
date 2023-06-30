@@ -1,0 +1,29 @@
+footer {
+    text-align: center
+}
+
+.topbar .left-topbar,.topbar .right-topbar {
+    padding: 10px 0
+}
+
+.page p {
+    margin-bottom: 20px
+}
+
+.page p:empty {
+    min-height: 1.5em
+}
+
+.page ul,.page ol {
+    margin-bottom: 20px
+}
+
+.page ul li,.page ol li {
+    margin-left: 20px;
+    margin-bottom: 10px
+}
+
+form span.error {
+    font-size: .85em;
+    color: #dc3545
+}
