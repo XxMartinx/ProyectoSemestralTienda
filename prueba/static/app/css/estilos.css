@@ -1,16 +1,24 @@
-
 * {
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background-color:#EDF2F7;
+    background: #aa4b6b;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-family: 'Open Sans', sans-serif;
 }
 
-h1,h2 {
+h1{
     font-family: 'Balsamiq Sans', cursive;
+}
+h2{
+    font-family: 'Balsamiq Sans', cursive;
+    color: white;
 }
 
 label.error {
@@ -21,14 +29,20 @@ label.error {
 header {
     width: 100%;
     height: 80px;
-    background-color: #b4b1b3;
+    background: #333333;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #dd1818, #333333);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #dd1818, #333333);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     /*margin-left: 30px;
-    padding-left: 30px;*//*right-top-bottom*/
+    padding-left: 30px;*/
+    /*right-top-bottom*/
     display: flex;
     justify-content: space-between;
 }
 
-header > div {
+header>div {
     width: 50%;
 }
 
@@ -38,7 +52,7 @@ header > div {
 }
 
 .logo {
-    width: 100px;
+    width: 75px;
     max-width: 40%;
     max-width: 40%;
     margin-left: 20px;
@@ -46,22 +60,27 @@ header > div {
 
 nav {
     display: flex;
-    justify-content: flex-end;/*flex-start - center - flex-end*/ /*horizontal*/
+    justify-content: flex-end;
+    /*flex-start - center - flex-end*/
+    /*horizontal*/
     align-items: center;
     height: 100%;
 }
 
-nav > ul {
+nav>ul {
     margin-right: 50px;
 }
 
-nav > ul > li {
+nav>ul>li {
     display: inline;
     margin-left: 10px;
 }
+nav>ul:hover{
+    background-color: orange;
+}
 
 nav a {
-    color:white;
+    color: white;
     text-decoration: none;
 }
 
@@ -82,7 +101,7 @@ nav a {
 
 #contenido {
     width: 80%;
-    margin:auto;
+    margin: auto;
     max-width: 1280px;
     min-height: 100vh;
 }
@@ -117,51 +136,95 @@ nav a {
     color: black;
     font-size: medium;
 }
-/*FOOTER*/
-
-footer {
-    width: 100%;
-    height: 300px;
-    background-color: #2D3748;
-}
-
-footer > .marcas {
-    width: 100%;
-    height: 80px;
-    background-color: #4A5568;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-footer > .marcas > img {
-    width: 50px;
-}
-
-footer > .logo_footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100% - 80px);/*100% - 80px*/
-}
-
-footer > .logo_footer > img {
-    width: 100px;
-}
 
 .menu {
     width: 40px;
     position: absolute;
     left: 10px;
     top: 10px;
-    display:none;
+    display: none;
 }
+
+.card-body {
+    background-color: gainsboro;
+    flex: 1 1 auto;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
+}
+
+/*FOOTER*/
+
+footer {
+    color: white;
+    margin-top: 20px;
+    background-color: var(--strong);
+}
+
+.box-creditos {
+    background-color: #2B6CB0;
+    min-width: 320px;
+    margin: .3em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box-f {
+    min-width: 320px;
+    margin: .3em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box-f {
+    width: 32%;
+    text-align: center;
+}
+
+.box-f p {
+    width: 100%;
+    padding: .2em;
+}
+
+.box-f h3 {
+    padding: .4em;
+}
+
+.box-logo-201{
+    margin-top: 8%;
+    height: 150px;
+}
+
+.box-logo-201 img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.web {
+    width: 100%;
+    padding: 0.5em;
+    text-align: center;
+}
+
+a:link, a:visited, a:active{
+    text-decoration: none;
+}
+
+a{
+    color: white;
+}
+
+
 
 /*FIN FOOTER*/
 
 
-input[type=text], input[type=email],
-input[type=number], select, textarea {
+input[type=text],
+input[type=email],
+input[type=number],
+select,
+textarea {
 
     width: 100%;
     padding: 5px;
@@ -173,7 +236,7 @@ textarea {
 }
 
 .button {
-    padding:5px 10px;
+    padding: 5px 10px;
     color: white;
     background-color: #2B6CB0;
     border: none;
@@ -182,9 +245,8 @@ textarea {
 
 .formulario_contacto {
     width: 500px;
-    margin-top:50px;
+    margin-top: 50px;
 }
-
 
 /*MEDIA QUERIES*/
 
@@ -194,6 +256,7 @@ textarea {
     .galeria {
         grid-template-columns: 1fr 1fr;
     }
+
     .producto {
         width: 50%;
     }
@@ -211,12 +274,13 @@ textarea {
     }
 
     .menu {
-        display:block;
+        display: block;
     }
 
     @keyframes animacion_producto_mobile {
         0% {
-            transform: scale(0.1); /*0-1*/
+            transform: scale(0.1);
+            /*0-1*/
             /*opacity: 0 - 1*/
         }
 
@@ -239,35 +303,36 @@ textarea {
         height: 60px;
         overflow: hidden;
         transition: all 0.6s;
-       
-        
+
+
     }
+
     #contenido {
         margin-top: 60px;
     }
 
-    header > div {
+    header>div {
         width: 100%;
     }
 
     .contenedor_logo {
         justify-content: center;
-        margin-top:10px;
+        margin-top: 10px;
     }
 
     nav {
         justify-content: center;
     }
 
-    nav > ul {
-        margin:0;
+    nav>ul {
+        margin: 0;
     }
 
-    nav > ul > li {
+    nav>ul>li {
         display: block;
-        margin:0;
+        margin: 0;
         text-align: center;
-        padding:20px 0;
+        padding: 20px 0;
     }
 
 }

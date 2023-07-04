@@ -136,3 +136,7 @@ def detalle_productos(request):
         'productos': productos
     }
     return render(request, 'tienda/detalleproducto.html', data) 
+
+
+def terminoycondiciones(request):    
+    return render(request, 'tienda/terminoycondiciones.html') 

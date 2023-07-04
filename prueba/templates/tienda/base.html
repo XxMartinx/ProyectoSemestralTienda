@@ -79,17 +79,38 @@
 
     </div>
 
+    
 
     <footer>
-        <div class="marcas">
-            <img src="{% static 'app/img/footer/apple.png' %}" alt="apple">
-            <img src="{% static 'app/img/footer/lenovo.png' %}" alt="lenovo">
-            <img src="{% static 'app/img/footer/microsoft.png' %}" alt="microsoft">
-            <img src="{% static 'app/img/footer/samsung.png' %}" alt="samsung">
-            <img src="{% static 'app/img/footer/xiaomi.png' %}" alt="xiaomi">
+        <div class="box-creditos">
+            <div class="box-f">
+                <h3>NUESTRA UBICACIÓN</h3><br>
+                <p>123 Calle del Ritmo</p>
+                <p>Ciudad HipHop, 54321</p>
+                <p>CHILE</p>
+            </div>
+            <div class="box-f">
+                <h3>Despachos</h3>
+                <p>
+                    <a href="">Formas de Pago</a>
+                </p>
+                <p>
+                    <a href="{% url 'terminoycondiciones' %}">Termino Y Condiciones</a>
+                </p>
+                <p>
+                    <a href="{% url 'contacto' %}">Contacto</a>
+                </p>
+            </div>
+            <div class="box-f">
+                <div class="box-logo-201">
+                    <a href="{% url 'home' %}"><img src="{% static 'app/img/portada.png' %}" class="logo2" alt="">
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="logo_footer">
-            <img src="{% static 'app/img/tecnomarketpngicono.png' %}" alt="logo">
+        <hr class="separador">
+        <div class="web">
+            <p>&copy; MiSitioWeb 2023</p>
         </div>
     </footer>
 

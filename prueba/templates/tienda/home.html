@@ -11,6 +11,7 @@
             pause: 2000
         });
     });
+
 </script>
 
 {% endblock %}
@@ -37,7 +38,6 @@
 <div class="productos">
     {% for p in productos %}
     <div class="producto">
-
         <div class="contenedor_producto">
             {% if p.imagen %}
             <img src="{{ p.imagen.url }}" alt="imagen producto">
@@ -45,11 +45,18 @@
             <div class="detalle">
                 <h5>{{ p.marca | capfirst }}</h5>
                 <h2>{{ p.nombre | title }}</h2>
-                <h3>${{ p.precio | intcomma }}</h3>
-                
+                <!-- Coloca este código donde deseas mostrar el carrito de compras en tu página web -->
+                <div id="cart">
+                    <ul id="cart-items"></ul>
+                    <p>
+                    <h3>${{ p.precio | intcomma }}</h3>
+                    </p>
+                    <button id="checkout-button">Pagar</button>
+                </div>
+
             </div>
 
-        </div> 
+        </div>
         <br>
 
     </div>

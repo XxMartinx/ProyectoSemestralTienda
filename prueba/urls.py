@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import home, contacto, galeria,agregar_producto,listar_producto,\
-     modificar_producto,eliminar_producto, registro,ProductoViewset,MarcaViewset,detalle_productos
+     modificar_producto,eliminar_producto, registro,ProductoViewset,MarcaViewset,detalle_productos,terminoycondiciones
 from rest_framework import routers
 
 
@@ -20,5 +20,6 @@ urlpatterns = [
     path('registro/', registro, name="registro"),
     path('api/', include(router.urls)),
     path('detalles-productos/', detalle_productos, name="detalle_productos"),
+    path('terminoy-condiciones/', terminoycondiciones, name="terminoycondiciones"),
 
 ]
