@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto
+from .models import Producto, Carrito, CarritoItem
 from .forms import ContactoForm, ProductoForm, CustomUserCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required, permission_required
 from rest_framework import viewsets
 from .serializers import ProductoSerializer, MarcaSerializer
+from django.contrib.auth.models import User
 # Create your views here.
 
 class MarcaViewset(viewsets.ModelViewSet):
@@ -130,13 +131,28 @@ def registro(request):
 
     return render(request, 'registration/registro.html', data)     
 
-def detalle_productos(request):
-    productos = Producto.objects.all()
-    data = {
-        'productos': productos
-    }
-    return render(request, 'tienda/detalleproducto.html', data) 
+def detalle_productos(request, producto_id):
+    producto =  get_object_or_404(Producto, id=producto_id)
+    return render(request, 'tienda/detalleproducto.html',{
+        'producto' : producto
+    }) 
 
 
 def terminoycondiciones(request):    
     return render(request, 'tienda/terminoycondiciones.html') 
+
+
+def carrito_index(request):
+    usuario_logeado = User.objects.get(username=request.user)
+    #productos = Carrito.objects.get(usuario=usuario_logeado.id).items.all()
+
+    #carrito = Carrito.objects.get(usuario=usuario_logeado.id)
+    nuevo_precio_Carrito = 0
+
+    # for item in carrito.items.all():
+    #     nuevo_precio_Carrito += item.producto.precio
+    # carrito.total = nuevo_precio_Carrito
+    # carrito.save()
+
+    return render(request, 'tienda/carrito/index.html')
+

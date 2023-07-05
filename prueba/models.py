@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Marca(models.Model):
@@ -15,10 +16,23 @@ class Producto(models.Model):
     marca = models.ForeignKey(Marca, on_delete=models.PROTECT)
     fecha_fabricacion = models.DateField()
     imagen = models.ImageField(upload_to="productos", null=True )
+    def __str__(self) -> str:
+        return f"Id: {self.pk} | Nombre: {self.nombre} | Imagen: {self.imagen} | Descripcion: {self.descripcion} | Precio: {self.precio} || Marca_id: {self.marca.id} "
+
+class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, related_name="carrito")
+    total = models.DecimalField(null=False, max_digits=10, decimal_places=2)
+    
     def __str__(self):
-        return self.nombre
+        return self.total
 
+class CarritoItem(models.Model):
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name="items")
 
+    def __str__(self):
+        return self.carrito
+        
 opciones_consultas = [
     [0, "consulta"],
     [1, "reclamo"],

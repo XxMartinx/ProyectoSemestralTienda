@@ -75,9 +75,7 @@ nav>ul>li {
     display: inline;
     margin-left: 10px;
 }
-nav>ul:hover{
-    background-color: orange;
-}
+
 
 nav a {
     color: white;
