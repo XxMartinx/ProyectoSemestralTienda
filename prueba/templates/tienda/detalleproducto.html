@@ -1,16 +1,33 @@
 {% extends 'tienda/base.html' %}
 
-{% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <div class="card">
-                {% csrf_token %}
-                <h1>{{ p.nombre }}</h1>
-            </div>
+{% block contenido %}
+<div class="row mt-5">
+    <div class="col-lg-3 col-md-4 col-xs-4 offset-xs-4 ">
+        <div class="card sombra text-center mb-5">
+            {% if p.imagen %}
+            <img src="{{ p.imagen.url }}" class="" alt="..."> 
+            {% endif %}
+            <div class="card-body">
+                <div class="">   
+                    <h3 class="Nombre-Producto">{{ p.nombre}}</h3>
+                    <hr>
+                    <p class="Precio-Producto">{{ p.precio }}</p>
+                    <p class="Detalle-Producto">{{ p.descripcion }}</p>
+                </div>
+                <form action="{% url 'carrito_save' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="{{ p.id }}">
+                    {% if user.is_superuser or user.is_authenticated %}
+                        <button type="submit" class="btn btn-success">Agregar Al Carrito</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-success" disabled>Agregar Al Carrito</button>
+                    {% endif %}
+                </form>
+            </div>     
         </div>
     </div>
 </div>
+    
 
 
 {% endblock %}

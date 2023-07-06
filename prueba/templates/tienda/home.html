@@ -23,10 +23,10 @@
 {% block contenido %}
 <div class="slider">
     <div>
-        <img src="{% static 'app/img/banner/banner1.png' %}" alt="">
+        <img src="{% static 'app/img/banner/Slider1.jpg' %}" alt="">
     </div>
     <div>
-        <img src="{% static 'app/img/banner/banner2.png' %}" alt="">
+        <img src="{% static 'app/img/banner/Slider2.jpg' %}" alt="">
     </div>
     <div>
         <img src="{% static 'app/img/banner/banner3.png' %}" alt="">
@@ -43,15 +43,14 @@
             <img src="{{ p.imagen.url }}" alt="imagen producto">
             {% endif %}
             <div class="detalle">
-                <h5>{{ p.marca | capfirst }}</h5>
                 <h2>{{ p.nombre | title }}</h2>
-                <!-- Coloca este código donde deseas mostrar el carrito de compras en tu página web -->
+                <h5>{{ p.marca | capfirst }}</h5>
                 <div id="cart">
                     <ul id="cart-items"></ul>
-                    <p>
-                    <h3>${{ p.precio | intcomma }}</h3>
-                    </p>
-                    <button id="checkout-button">Ver Mas</button>
+                    <div class="cart-bottom">
+                        <a href="{% url 'detalle_productos' p.id %}" style="color: black;">Ver mas</a> 
+                        <h3 class="contenedor-precio">${{ p.precio | intcomma }}</h3>
+                    </div>
                 </div>
 
             </div>
