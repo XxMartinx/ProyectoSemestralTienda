@@ -38,13 +38,13 @@
                     <li>
                         <a href="{% url 'contacto' %}">Contacto</a>
                     </li>
-                    <li><a href="{% url 'galeria' %}">Galería</a></li>  
-                    {%  if perms.app.add_producto %}  
+                    <li><a href="{% url 'galeria' %}">Galería</a></li>
+                    {% if perms.app.add_producto %}
                     <li>
                         <a href="{% url 'agregar_producto' %}">Agregar Producto</a>
                     </li>
                     {% endif %}
-                    {%  if perms.app.view_producto %}  
+                    {% if perms.app.view_producto %}
                     <li>
                         <a href="{% url 'listar_producto' %}">Listado Productos</a>
                     </li>
@@ -73,9 +73,10 @@
                         <a role="button" enabled="false"><i class="fas fa-shopping-cart"></i></a>
                     </li>
                     {% endif %}
-                    
+
                 </ul>
             </nav>
+
 
         </div>
 
@@ -90,7 +91,7 @@
 
     </div>
 
-    
+
 
     <footer>
         <div class="box-creditos separador2">
@@ -102,9 +103,6 @@
             </div>
             <div class="box-f">
                 <h3>Despachos</h3>
-                <p>
-                    <a href="">Formas de Pago</a>
-                </p>
                 <p>
                     <a href="{% url 'terminoycondiciones' %}">Termino Y Condiciones</a>
                 </p>
@@ -132,16 +130,16 @@
 
 
     {% if messages %}
-        {% for m in messages %}
-            <script>
-                swal.fire({
-                    "title": "Felicitaciones",
-                    "text": "{{m}}",
-                    "icon": "success"
+    {% for m in messages %}
+    <script>
+        swal.fire({
+            "title": "Felicitaciones",
+            "text": "{{m}}",
+            "icon": "success"
 
-                })
-            </script>
-        {% endfor %}
+        })
+    </script>
+    {% endfor %}
     {% endif %}
 
     {% block js %}

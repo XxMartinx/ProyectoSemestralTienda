@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Carrito, CarritoItem
+from .models import Producto, Carrito, CarritoItem, MontoExtra
 from .forms import ContactoForm, ProductoForm, CustomUserCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -142,20 +142,28 @@ def terminoycondiciones(request):
 
 @login_required
 def carrito_index(request):
-    usuario_logeado = User.objects.get(username=request.user)
-    carrito = Carrito.objects.get(usuario=usuario_logeado.id)
+    usuario_logeado = request.user
+    carrito = get_object_or_404(Carrito, usuario=usuario_logeado)
     productos = carrito.items.all()
-    
-    nuevo_precio_carrito = 0
-    for item in carrito.items.all():
-        nuevo_precio_carrito += item.producto.precio
+    monto_extra = MontoExtra.objects.first().valor if MontoExtra.objects.exists() else None
+
+    nuevo_precio_carrito = sum(item.producto.precio for item in productos)
     carrito.total = nuevo_precio_carrito
     carrito.save()
 
-    return render(request, 'tienda/carrito/index.html', {
+    nuevo_precio_carrito_impuesto = sum(item.producto.precio for item in productos) + (monto_extra or 0)
+    carrito.total = nuevo_precio_carrito_impuesto
+    carrito.save()
+
+    contexto = {
         'usuario': usuario_logeado,
-        'items_carrito': productos
-    })
+        'items_carrito': productos,
+        'monto_extra': monto_extra,
+        'total_carrito': nuevo_precio_carrito,
+        'total_carrito_impuesto': nuevo_precio_carrito_impuesto,
+    }
+
+    return render(request, 'tienda/carrito/index.html', contexto)
 
 @login_required
 def carrito_save(request):
@@ -177,6 +185,7 @@ def carrito_save(request):
 
     else:
         return redirect("carrito")
+
 @login_required
 def carrito_clean(request):
     usuario_logeado = User.objects.get(username=request.user)
@@ -185,18 +194,40 @@ def carrito_clean(request):
     carrito.total = 0
     carrito.save()
     return redirect('carrito')
+
 @login_required
 def item_carrito_delete(request, item_carrito_id):
     item_carrito = CarritoItem.objects.get(id=item_carrito_id)
     carrito = item_carrito.carrito
     
     # Vuelvo a calcular el precio del carrito
-    nuevo_precio_Carrito = 0 - item_carrito.producto.precio
+    nuevo_precio_carrito = 0 - item_carrito.producto.precio
     for item in carrito.items.all():
-        nuevo_precio_Carrito += item.producto.precio
+        nuevo_precio_carrito += item.producto.precio
 
     # Realizo los cambios en la base de datos
-    carrito.total = nuevo_precio_Carrito
+    carrito.total = nuevo_precio_carrito
     item_carrito.delete()
     carrito.save()
     return redirect("carrito")
+
+@login_required
+def finalizar_compra(request):
+    if request.method == 'GET':
+        usuario_logeado = request.user
+
+        carrito = Carrito.objects.get(usuario=usuario_logeado)
+
+        # Verificar si el carrito está vacío
+        if carrito.items.exists():
+            # Realizar la lógica para finalizar la compra aquí
+            # ...
+            carrito.items.all().delete()
+            carrito.total = 0
+            carrito.save()
+
+            messages.success(request, "¡Tu compra ha sido realizada con éxito!")
+        else:
+            messages.warning(request, "No tienes productos en tu carrito.")
+
+        return redirect('carrito')  # Redirecciona al carrito de compras

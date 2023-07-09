@@ -32,6 +32,10 @@ class CarritoItem(models.Model):
 
     def __str__(self):
         return self.carrito
+
+class MontoExtra(models.Model):
+    valor = models.IntegerField()
+
         
 opciones_consultas = [
     [0, "consulta"],
@@ -40,6 +44,7 @@ opciones_consultas = [
     [3, "felicitaciones"],
 
 ]
+
 
 
 class Contacto(models.Model):
@@ -53,4 +58,5 @@ class Contacto(models.Model):
         return self.nombre
 
         
+
 

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import home, contacto, galeria,agregar_producto,listar_producto,\
-     modificar_producto,eliminar_producto, registro,ProductoViewset,MarcaViewset,detalle_productos,terminoycondiciones, carrito_index, carrito_save, carrito_clean, item_carrito_delete
+     modificar_producto,eliminar_producto, registro,ProductoViewset,MarcaViewset,detalle_productos,terminoycondiciones, carrito_index, carrito_save, carrito_clean, item_carrito_delete,finalizar_compra
 from rest_framework import routers
 
 
@@ -27,5 +27,7 @@ urlpatterns = [
     path('carrito/agregar',carrito_save, name="carrito_save"),
     path('carrito/clean',carrito_clean, name="carrito_clean"),
     path('item_carrito/<item_carrito_id>/eliminar', item_carrito_delete, name="item_carrito_delete"),
+    path('finalizar_compra/', finalizar_compra, name='finalizar_compra'),
+
 
 ]
