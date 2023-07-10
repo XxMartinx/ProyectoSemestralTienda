@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Carrito, CarritoItem, MontoExtra
+from .models import Producto, Carrito, CarritoItem, MontoExtra  
 from .forms import ContactoForm, ProductoForm, CustomUserCreationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from rest_framework import viewsets
 from .serializers import ProductoSerializer, MarcaSerializer
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordChangeForm
+
 
 class MarcaViewset(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
@@ -218,10 +220,8 @@ def finalizar_compra(request):
 
         carrito = Carrito.objects.get(usuario=usuario_logeado)
 
-        # Verificar si el carrito está vacío
+
         if carrito.items.exists():
-            # Realizar la lógica para finalizar la compra aquí
-            # ...
             carrito.items.all().delete()
             carrito.total = 0
             carrito.save()
@@ -230,4 +230,28 @@ def finalizar_compra(request):
         else:
             messages.warning(request, "No tienes productos en tu carrito.")
 
-        return redirect('carrito')  # Redirecciona al carrito de compras
+        return redirect('carrito')  
+
+@login_required
+def ver_perfil(request):
+    usuario = User.objects.get(username=request.user.username)
+    data = {
+        'usuario': usuario
+    }
+    return render(request, 'tienda/ver_perfil.html', data)
+
+
+@login_required
+def cambiar_contraseña(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, 'Tu contraseña ha sido modificada.')
+            return redirect('ver_perfil')
+    else:
+        form = PasswordChangeForm(user=request.user)
+    
+    return render(request, 'tienda/cambiar_contraseña.html', {'form': form})
+
+

@@ -1,0 +1,11 @@
+{% extends 'tienda/base.html' %}
+
+{% block contenido %}
+<div class="perfil-usuario">
+    <h1>Perfil de usuario</h1>
+    <p><strong>ID de usuario:</strong> {{ usuario.id }}</p>
+    <p><strong>Nombre:</strong> {{ usuario.username }}</p>
+    <p><strong>Correo electrónico:</strong> {{ usuario.email }}</p>
+    <a class="btn btn-primary" href="{% url 'cambiar_contraseña' %}">Cambiar Contraseña</a>
+</div>
+{% endblock %}

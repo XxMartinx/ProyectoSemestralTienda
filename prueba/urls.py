@@ -2,7 +2,7 @@ from django.urls import path, include
 from .views import home, contacto, galeria,agregar_producto,listar_producto,\
      modificar_producto,eliminar_producto, registro,ProductoViewset,MarcaViewset,detalle_productos,terminoycondiciones, carrito_index, carrito_save, carrito_clean, item_carrito_delete,finalizar_compra
 from rest_framework import routers
-
+from . import views 
 
 router =  routers.DefaultRouter()
 router.register('producto', ProductoViewset)
@@ -21,6 +21,11 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('detalles-productos/<id>', detalle_productos, name="detalle_productos"),
     path('terminoy-condiciones/', terminoycondiciones, name="terminoycondiciones"),
+    path('perfil/', views.ver_perfil, name='ver_perfil'),
+    path('perfil/cambiar-contraseña/', views.cambiar_contraseña, name='cambiar_contraseña'),
+
+
+    
 
     #CARRITO
     path('carrito/',carrito_index, name="carrito"),
@@ -28,6 +33,10 @@ urlpatterns = [
     path('carrito/clean',carrito_clean, name="carrito_clean"),
     path('item_carrito/<item_carrito_id>/eliminar', item_carrito_delete, name="item_carrito_delete"),
     path('finalizar_compra/', finalizar_compra, name='finalizar_compra'),
+    
+
+    
+    
 
 
 ]

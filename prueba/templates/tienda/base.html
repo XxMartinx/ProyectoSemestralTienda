@@ -27,18 +27,18 @@
         <div class="contenedor_logo">
             <img class="logo" src="{% static 'app/img/portadalogo.ico' %}" alt="logo">
         </div>
-
         <div>
-
             <nav id="nav">
                 <ul>
                     <li>
-                        <a href="{% url 'home' %}"> Inicio </a>
+                        <a href="{% url 'home' %}">Inicio</a>
                     </li>
                     <li>
                         <a href="{% url 'contacto' %}">Contacto</a>
                     </li>
-                    <li><a href="{% url 'galeria' %}">Galería</a></li>
+                    <li>
+                        <a href="{% url 'galeria' %}">Galería</a>
+                    </li>
                     {% if perms.app.add_producto %}
                     <li>
                         <a href="{% url 'agregar_producto' %}">Agregar Producto</a>
@@ -51,35 +51,34 @@
                     {% endif %}
                     {% if user.is_authenticated %}
                     <li>
-                        <a href="{% url 'logout' %}">Cerrar Sesion</a>
+                        <a href="{% url 'logout' %}">Cerrar Sesión</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li>
-                        <a href="#">@{{ user.username }}</a>
+                        <a href="{% url 'ver_perfil' %}">@{{ user.username }}</a>
                     </li>
+                    {% endif %}
                     {% else %}
                     <li>
-                        <a href="{% url 'login' %}">Iniciar Sesion</a>
+                        <a href="{% url 'login' %}">Iniciar Sesión</a>
                     </li>
                     <li>
                         <a href="{% url 'registro' %}">Registro</a>
                     </li>
                     {% endif %}
+
                     {% if user.is_authenticated %}
                     <li>
                         <a role="button" href="{% url 'carrito' %}"><i class="fas fa-shopping-cart"></i></a>
                     </li>
                     {% else %}
                     <li>
-                        <a role="button" enabled="false"><i class="fas fa-shopping-cart"></i></a>
+                        <a role="button" disabled><i class="fas fa-shopping-cart"></i></a>
                     </li>
                     {% endif %}
-
                 </ul>
             </nav>
-
-
         </div>
-
     </header>
 
     <div id="contenido">
@@ -90,6 +89,7 @@
 
 
     </div>
+
 
 
 
@@ -104,7 +104,7 @@
             <div class="box-f">
                 <h3>Despachos</h3>
                 <p>
-                    <a href="{% url 'terminoycondiciones' %}">Termino Y Condiciones</a>
+                    <a href="{% url 'terminoycondiciones' %}">Términos y Condiciones</a>
                 </p>
                 <p>
                     <a href="{% url 'contacto' %}">Contacto</a>
@@ -112,15 +112,17 @@
             </div>
             <div class="box-f">
                 <div class="box-logo-201">
-                    <a href="{% url 'home' %}"><img src="{% static 'app/img/portada.png' %}" class="logo2" alt="">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'app/img/portada.png' %}" class="logo2" alt="">
                     </a>
                 </div>
             </div>
             <div class="web separador">
-                <p>&copy; MiSitioWeb 2023</p>
+                <p>&copy; MiSitioWeb 2023. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 

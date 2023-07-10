@@ -35,18 +35,13 @@ class CarritoItem(models.Model):
 
 class MontoExtra(models.Model):
     valor = models.IntegerField()
-
-        
 opciones_consultas = [
     [0, "consulta"],
     [1, "reclamo"],
     [2, "sugerencia"],
-    [3, "felicitaciones"],
+    [3, "Cambio De Contraseña"],
 
 ]
-
-
-
 class Contacto(models.Model):
     nombre = models.CharField(max_length=50)
     correo = models.EmailField()
@@ -57,6 +52,8 @@ class Contacto(models.Model):
     def __str__(self):
         return self.nombre
 
-        
 
+
+
+        
 

@@ -90,8 +90,15 @@ WSGI_APPLICATION = 'tiendaonline.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': '127.0.0.1:1521/xe',
+        'USER': 'martin',
+        'PASSWORD': 'juanito2',
+        'TEST': {
+            'USER': 'default_test',
+            'TABLESPACE': 'default_test_tbls',
+            'TABLESPACE_TMP': 'default_test_tbls_tmp',
+        },
     }
 }
 

@@ -1,0 +1,13 @@
+{% extends 'tienda/base.html' %}
+
+{% block contenido %}
+<div class="cambiar-contraseña-container">
+    <h1 class="titulo-cambiar-contraseña">Cambiar contraseña</h1>
+    <form class="formulario-cambiar-contraseña" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="boton-guardar-cambios" type="submit">Guardar Cambios</button>
+    </form>
+</div>
+{% endblock %}
+
